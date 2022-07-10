@@ -1,0 +1,193 @@
+@prefix : <http://www.semanticweb.org/owl/owlapi/turtle#> .
+@prefix fab: <urn:webprotege:ontology:560ddd17-72c3-4853-ab82-38798f7172a9#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <urn:webprotege:ontology:560ddd17-72c3-4853-ab82-38798f7172a9> .
+
+<urn:webprotege:ontology:560ddd17-72c3-4853-ab82-38798f7172a9> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  urn:webprotege:ontology:560ddd17-72c3-4853-ab82-38798f7172a9#hasDate
+fab:hasDate rdf:type owl:ObjectProperty ;
+            rdfs:domain :DateWithOneYearSpecification ,
+                        :DateWithTwoYearSpecifications ;
+            rdfs:range :MostProbableDate .
+
+
+###  urn:webprotege:ontology:560ddd17-72c3-4853-ab82-38798f7172a9#normalizedDate
+fab:normalizedDate rdf:type owl:ObjectProperty ;
+                   rdfs:domain owl:Thing ;
+                   rdfs:range :NormalizedDate .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#deviation
+:deviation rdf:type owl:DatatypeProperty ;
+           rdfs:domain :MostProbableDate ;
+           rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#precision
+:precision rdf:type owl:DatatypeProperty ;
+           rdfs:domain :MostProbableDate ;
+           rdfs:range xsd:float .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#year
+:year rdf:type owl:DatatypeProperty ;
+      rdfs:domain :MostProbableDate ;
+      rdfs:range xsd:int .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#AfterSpecificDate
+:AfterSpecificDate rdf:type owl:Class ;
+                   rdfs:subClassOf :DateWithOneYearSpecification ;
+                   rdfs:label "AfterSpecificDate"@en .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#BeforeSpecificDate
+:BeforeSpecificDate rdf:type owl:Class ;
+                    rdfs:subClassOf :DateWithOneYearSpecification ;
+                    rdfs:label "BeforeSpecificDate"@en .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#CircaDate
+:CircaDate rdf:type owl:Class ;
+           rdfs:subClassOf :DateWithOneYearSpecification ;
+           rdfs:label "CircaDate"@en .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#CompletelyVagueDate
+:CompletelyVagueDate rdf:type owl:Class ;
+                     rdfs:subClassOf :NormalizedDate ;
+                     rdfs:label "CompletelyVagueDate"@en .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#DateOption
+:DateOption rdf:type owl:Class ;
+            rdfs:subClassOf :DateWithTwoYearSpecifications ;
+            rdfs:label "DateOption"@en .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#DateWithOneYearSpecification
+:DateWithOneYearSpecification rdf:type owl:Class ;
+                              rdfs:subClassOf :NormalizedDate ,
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty fab:hasDate ;
+                                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                owl:onClass :MostProbableDate
+                                              ] .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#DateWithTwoYearSpecifications
+:DateWithTwoYearSpecifications rdf:type owl:Class ;
+                               rdfs:subClassOf :NormalizedDate ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty fab:hasDate ;
+                                                 owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                                 owl:onClass :MostProbableDate
+                                               ] .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#MostProbableDate
+:MostProbableDate rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#NormalizedDate
+:NormalizedDate rdf:type owl:Class ;
+                rdfs:label "NormalizedDate"@en .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#VagueTimeSpan
+:VagueTimeSpan rdf:type owl:Class ;
+               rdfs:subClassOf :DateWithTwoYearSpecifications ;
+               rdfs:label "VagueTimeSpan"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#CircaDate1
+:CircaDate1 rdf:type owl:NamedIndividual ,
+                     :CircaDate ;
+            fab:hasDate :MostProbableDate1 .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#CircaDate2
+:CircaDate2 rdf:type owl:NamedIndividual ,
+                     :CircaDate ;
+            fab:hasDate :MostProbableDate2 .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#MostProbableDate1
+:MostProbableDate1 rdf:type owl:NamedIndividual ,
+                            :MostProbableDate ;
+                   :deviation "5"^^xsd:int ;
+                   :precision "0.8"^^xsd:float ;
+                   :year "1880"^^xsd:int .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#MostProbableDate2
+:MostProbableDate2 rdf:type owl:NamedIndividual ,
+                            :MostProbableDate ;
+                   :deviation "20"^^xsd:int ;
+                   :precision "0.5"^^xsd:float ;
+                   :year "1700"^^xsd:int .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#MostProbableDate3
+:MostProbableDate3 rdf:type owl:NamedIndividual ,
+                            :MostProbableDate ;
+                   :deviation "0"^^xsd:int ;
+                   :precision "1.0"^^xsd:float ;
+                   :year "1750"^^xsd:int .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#MostProbableDate4
+:MostProbableDate4 rdf:type owl:NamedIndividual ,
+                            :MostProbableDate ;
+                   :deviation "0"^^xsd:int ;
+                   :precision "1.0"^^xsd:float ;
+                   :year "1760"^^xsd:int .
+
+
+###  http://www.semanticweb.org/owl/owlapi/turtle#VagueTimeSpan1
+:VagueTimeSpan1 rdf:type owl:NamedIndividual ,
+                         :VagueTimeSpan ;
+                fab:hasDate :MostProbableDate3 ,
+                            :MostProbableDate4 .
+
+
+###  urn:webprotege:ontology:560ddd17-72c3-4853-ab82-38798f7172a9#Thing1
+fab:Thing1 rdf:type owl:NamedIndividual ,
+                    owl:Thing ;
+           fab:normalizedDate :CircaDate1 .
+
+
+###  urn:webprotege:ontology:560ddd17-72c3-4853-ab82-38798f7172a9#Thing2
+fab:Thing2 rdf:type owl:NamedIndividual ,
+                    owl:Thing ;
+           fab:normalizedDate :VagueTimeSpan1 .
+
+
+###  urn:webprotege:ontology:560ddd17-72c3-4853-ab82-38798f7172a9#Thing3
+fab:Thing3 rdf:type owl:NamedIndividual ,
+                    owl:Thing ;
+           fab:normalizedDate :CircaDate2 .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
