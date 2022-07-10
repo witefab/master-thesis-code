@@ -1,0 +1,81 @@
+# CQ1
+select ?CHO where { 
+    ?CHO :normalizedDate ?ndate.
+    ?ndate rdf:type :VagueTimeSpan.
+    ?ndate :hasDate ?mpdate.
+    ?mpdate :precision ?precision.
+    filter(?precision = 1.0)
+}
+
+# CQ2
+select ?CHO where { 
+    ?CHO :normalizedDate ?ndate.
+	?ndate rdf:type :VagueTimeSpan.
+    ?ndate :hasDate ?mpdate.
+    ?mpdate :year ?year.
+    filter(?year < 1900)
+}
+
+# CQ3
+ASK { 
+    <http://data.europeana.eu/proxy/provider/2048224/00004515> 
+        :normalizedDate ?ndate.
+    ?ndate rdf:type :VagueTimeSpan.
+}
+
+# CQ4
+select ?CHO where { 
+    ?CHO :normalizedDate ?ndate.
+    ?ndate rdf:type :CircaDate.
+    ?ndate :hasDate ?mpdate.
+    ?mpdate :deviation ?deviation.
+    filter(?deviation <= 5)
+}
+
+# CQ5
+select ?CHO where { 
+    ?CHO :normalizedDate ?ndate.
+    ?ndate rdf:type :CircaDate.
+    ?ndate :hasDate ?mpdate.
+    ?mpdate :precision ?precision.     
+    filter(?precision >= 0.7)
+}
+
+# CQ6
+select ?CHO where { 
+    ?CHO :normalizedDate ?ndate.
+    ?ndate rdf:type :CircaDate.
+    ?ndate :hasDate ?mpdate.
+    ?mpdate :precision ?precision;
+            :year ?year.     
+    filter(?precision >= 0.9)
+    filter(?year = 1912)
+}
+
+# CQ7
+select ?CHO where { 
+    ?CHO :normalizedDate ?ndate.
+    ?ndate rdf:type :BeforeSpecificDate.
+    ?ndate :hasDate ?mpdate.
+    ?mpdate :year ?year.
+    filter(?year < 1900)
+}
+
+# CQ8
+select ?CHO where { 
+    ?CHO :normalizedDate :BeforeSpecificDate1700.    
+}
+
+# CQ9
+select ?CHO where { 
+    ?CHO :normalizedDate ?ndate.
+    ?ndate rdf:type :AfterSpecificDate.
+    ?ndate :hasDate ?mpdate.
+    ?mpdate :year ?year.
+    filter(?year > 1900)
+}
+
+# CQ10
+select ?CHO where { 
+    ?CHO :normalizedDate :AfterSpecificDate1860.    
+}
